@@ -4,7 +4,8 @@
   "description": "Nodejs project",
   "main": "app.js",
   "scripts": {
-    "start": "nodemon src/app.js"
+    "task1": "node src/nodejs_homework1/task1.js",
+    "task2": "node src/nodejs_homework1/task2.js"
   },
   "repository": {
     "type": "git",
@@ -19,8 +20,10 @@
     "nodemon": "^2.0.6"
   },
   "keywords": [
-    "node",
+    "Node",
     "nodeJS",
+    "nodejs",
+    "javascript",
     "js"
   ]
 }
