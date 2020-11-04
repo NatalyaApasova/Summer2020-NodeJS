@@ -1,24 +1,35 @@
 {
-  "name": "summer2020",
+  "name": "Summer2020-NodeJS",
   "version": "1.0.0",
-  "description": "",
-  "main": "app.js",
+  "description": "Nodejs project",
   "scripts": {
-    "start": "node src/app.js"
+    "task1": "nodemon lib/nodejs_homework1/task1.js",
+    "task2": "nodemon lib/nodejs_homework1/task2.js",
+    "build": "babel src -d lib"
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/aliaksei-lyzo/Summer2020.git"
+    "url": "git+https://https://github.com/NatalyaApasova/Summer2020-NodeJS.git"
   },
-  "author": "",
+  "author": "Natalya Apasova",
   "license": "ISC",
-  "bugs": {
-    "url": "https://github.com/aliaksei-lyzo/Summer2020/issues"
-  },
-  "homepage": "https://github.com/aliaksei-lyzo/Summer2020#readme",
   "devDependencies": {
+    "@babel/cli": "^7.12.1",
+    "@babel/core": "^7.12.3",
+    "@babel/preset-env": "^7.12.1",
     "eslint": "^6.8.0",
     "eslint-config-airbnb-base": "^14.1.0",
-    "eslint-plugin-import": "^2.20.2"
+    "eslint-plugin-import": "^2.20.2",
+    "nodemon": "^2.0.6"
+  },
+  "keywords": [
+    "Node",
+    "nodeJS",
+    "nodejs",
+    "javascript",
+    "js"
+  ],
+  "dependencies": {
+    "csvtojson": "^2.0.10"
   }
 }
