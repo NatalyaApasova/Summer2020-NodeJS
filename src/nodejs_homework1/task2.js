@@ -1,6 +1,6 @@
-const fs = require('fs');
-const csv = require('csvtojson');
-const { pipeline } = require('stream');
+import * as fs from 'fs';
+import csv from 'csvtojson';
+import { pipeline } from 'stream';
 
 const csvFilePath = './src/nodejs_homework1/csv/nodejs-hw1-ex1.csv';
 const txtFilePath = './src/nodejs_homework1/nodejs-hw1-ex1.txt';
@@ -20,7 +20,7 @@ csv({
 })
   .fromFile(csvFilePath)
   .on('data', (buffer) => {
-    data = buffer.toString();
+    let data = buffer.toString();
     console.log(data);
     pipeline(
       data,
