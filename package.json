@@ -1,24 +1,32 @@
 {
-  "name": "summer2020",
+  "name": "Summer2020-NodeJS",
   "version": "1.0.0",
-  "description": "",
-  "main": "app.js",
+  "description": "Nodejs project",
+  "main": "src/nodejs_homework_2/app.mjs",
   "scripts": {
-    "start": "node src/app.js"
+    "start": "nodemon src/nodejs_homework_2/app.mjs"
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/aliaksei-lyzo/Summer2020.git"
+    "url": "git+https://https://github.com/NatalyaApasova/Summer2020-NodeJS.git"
   },
-  "author": "",
+  "author": "Natalya Apasova",
   "license": "ISC",
-  "bugs": {
-    "url": "https://github.com/aliaksei-lyzo/Summer2020/issues"
-  },
-  "homepage": "https://github.com/aliaksei-lyzo/Summer2020#readme",
   "devDependencies": {
     "eslint": "^6.8.0",
     "eslint-config-airbnb-base": "^14.1.0",
-    "eslint-plugin-import": "^2.20.2"
+    "eslint-plugin-import": "^2.20.2",
+    "nodemon": "^2.0.6"
+  },
+  "keywords": [
+    "node",
+    "nodeJS",
+    "js"
+  ],
+  "dependencies": {
+    "express": "^4.17.1",
+    "express-joi-validation": "^5.0.0",
+    "joi": "^17.3.0",
+    "uuid": "^8.3.1"
   }
 }
