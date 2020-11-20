@@ -1,5 +1,5 @@
 import pkg from 'sequelize';
-// import { sequelize } from './index.mjs'
+
 const { Sequelize, Model, DataTypes } = pkg;
 
 export default (sequelize, Sequelize) => {
@@ -8,7 +8,8 @@ export default (sequelize, Sequelize) => {
       type: DataTypes.UUID,
       defaultValue: Sequelize.UUIDV4,
       unique: true,
-      primaryKey: true
+      primaryKey: true,
+      allowNull: false
     },
     login: {
       type: DataTypes.STRING,

@@ -1,4 +1,4 @@
-import db from "../models/index.mjs";
+import db from "../services/index.mjs";
 
 const User = db.users;
 const Op = db.Sequelize.Op;
@@ -7,57 +7,51 @@ export const redirect = (req, res) => {
   res.redirect('users');
 }
 
-export const findAll = (req, res) => {
-  User.findAll()
-    .then(data => {
-      res.send(data);
-    })
-    .catch(err => {
-      res.status(500).send({
-        message:
-          err.message || "Some error occurred while retrieving users."
-      });
-    });
-};
-
 export const findOne = (req, res) => {
-  const id = req.params.id;
+  const id = req.params.uuid;
 
   User.findByPk(id)
-    .then(data => {
-      res.send(data);
+    .then((user) => {
+      res.send(user);
     })
-    .catch(err => {
+    .catch((err) => {
       res.status(500).send({
         message: `Error retrieving User with id=${id}`
       });
     });
 };
 
-export const getAutoSuggestUsers = (req, res) => {
-  if (req.query.loginSubstring && req.query.limit) {
+export const getUsers = (req, res) => {
+  const { loginSubstring, limit } = req.query;
+  if (loginSubstring && limit) {
     User.findAll({
-          limit: limit,
-          where: {
-            [Op.substring]: loginSubstring,
-          }
-        })
-    .then(data => {
+      limit: limit,
+      where: {
+        login: {
+          [Op.substring]: loginSubstring,
+        }
+      }
+    })
+      .then((data) => {
+        res.send(data);
+      })
+      .catch((err) => {
+        res.status(500).send({
+          message:
+            err.message || "Some error occurred while retrieving users."
+        });
+      })
+  } else {
+    User.findAll().then((data) => {
       res.send(data);
     })
-    .catch(err => {
-      res.status(500).send({
-        message:
-          err.message || "Some error occurred while retrieving users."
-      });
-    })
-  } else {
-    User.findAll()
   }
 };
 
 export const create = (req, res) => {
-  if (!req.body.login || !req.body.password || !req.body.age ) {
+  const { login, password, age } = req.body;
+
+  if (!login || !password || !age ) {
     res.status(400).send({
       message: "All fields are required."
     });
@@ -65,16 +59,16 @@ export const create = (req, res) => {
   }
 
   const user = {
-    login: req.body.login,
-    password: req.body.password,
-    age: req.body.age
+    login,
+    password,
+    age
   };
 
   User.create(user)
-    .then(data => {
+    .then((data) => {
       res.send(data);
     })
-    .catch(err => {
+    .catch((err) => {
       res.status(500).send({
         message:
           err.message || "Some error occurred while creating the User."
@@ -83,12 +77,12 @@ export const create = (req, res) => {
 };
 
 export const update = (req, res) => {
-  const id = req.params.id;
+  const id = req.params.uuid;
 
   User.update(req.body, {
-    where: { id: id }
+    where: { uuid: id }
   })
-    .then(num => {
+    .then((num) => {
       if (num == 1) {
         res.send({
           message: "The User was updated successfully."
@@ -99,7 +93,7 @@ export const update = (req, res) => {
         });
       }
     })
-    .catch(err => {
+    .catch((err) => {
       res.status(500).send({
         message: "Error updating the User with id=" + id
       });
@@ -107,12 +101,12 @@ export const update = (req, res) => {
 };
 
 export const remove = (req, res) => {
-  const id = req.params.id;
+  const id = req.params.uuid;
 
- User.update({ isDeleted: true }, {
-    where: { id: id }
+  User.update({ isDeleted: true }, {
+    where: { uuid: id }
   })
-    .then(num => {
+    .then((num) => {
       if (num == 1) {
         res.send({
           message: "The User was deleted successfully!"
@@ -123,7 +117,7 @@ export const remove = (req, res) => {
         });
       }
     })
-    .catch(err => {
+    .catch((err) => {
       res.status(500).send({
         message: `Could not delete the User with id=${id}`
       });
@@ -134,10 +128,10 @@ export const deleteAll = (req, res) => {
   User.update({ isDeleted: true }, {
     where: {}
   })
-    .then(nums => {
+    .then((nums) => {
       res.send({ message: `${nums} Users were deleted successfully!` });
     })
-    .catch(err => {
+    .catch((err) => {
       res.status(500).send({
         message:
           err.message || "Some error occurred while removing all users."
