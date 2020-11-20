@@ -4,5 +4,5 @@ export default {
   USER: "ijrpwiyi",
   PASSWORD: "TkD6T_2XhjlK-msA6zqUEjFJr1J8VMaO",
   DB: "ijrpwiyi",
-  dialect: "postgres",
-};
+  dialect: "postgres"
+}

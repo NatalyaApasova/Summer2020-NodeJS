@@ -19,7 +19,7 @@ export const findOne = (req, res) => {
         message: `Error retrieving User with id=${id}`
       });
     });
-};
+}
 
 export const getUsers = (req, res) => {
   const { loginSubstring, limit } = req.query;
@@ -46,17 +46,10 @@ export const getUsers = (req, res) => {
       res.send(data);
     })
   }
-};
+}
 
 export const create = (req, res) => {
   const { login, password, age } = req.body;
-
-  if (!login || !password || !age ) {
-    res.status(400).send({
-      message: "All fields are required."
-    });
-    return;
-  }
 
   const user = {
     login,
@@ -74,7 +67,7 @@ export const create = (req, res) => {
           err.message || "Some error occurred while creating the User."
       });
     });
-};
+}
 
 export const update = (req, res) => {
   const id = req.params.uuid;
@@ -89,7 +82,7 @@ export const update = (req, res) => {
         });
       } else {
         res.send({
-          message: `Cannot update the User with id=${id}. Maybe Tutorial was not found or req.body is empty!`
+          message: `Cannot update the User with id=${id}. Maybe User was not found or req.body is empty.`
         });
       }
     })
@@ -98,7 +91,7 @@ export const update = (req, res) => {
         message: "Error updating the User with id=" + id
       });
     });
-};
+}
 
 export const remove = (req, res) => {
   const id = req.params.uuid;
@@ -109,27 +102,27 @@ export const remove = (req, res) => {
     .then((num) => {
       if (num == 1) {
         res.send({
-          message: "The User was deleted successfully!"
+          message: "The User was deleted successfully."
         });
       } else {
         res.send({
-          message: `Cannot delete the User with id=${id}. Maybe the User was not found!`
+          message: `Cannot delete the User with id=${id}. Maybe the User was not found.`
         });
       }
     })
     .catch((err) => {
       res.status(500).send({
-        message: `Could not delete the User with id=${id}`
+        message: `Could not delete the User with id=${id}.`
       });
     });
-};
+}
 
 export const deleteAll = (req, res) => {
   User.update({ isDeleted: true }, {
     where: {}
   })
     .then((nums) => {
-      res.send({ message: `${nums} Users were deleted successfully!` });
+      res.send({ message: `${nums} Users were deleted successfully.` });
     })
     .catch((err) => {
       res.status(500).send({
@@ -137,4 +130,4 @@ export const deleteAll = (req, res) => {
           err.message || "Some error occurred while removing all users."
       });
     });
-};
+}

@@ -3,7 +3,6 @@ import * as users from "../controllers/user.controller.mjs";
 import { validator, postSchema, updateSchema } from '../services/validation.mjs';
 
 export default (app) => {
-
   const router = express.Router();
 
   router.get("/", users.redirect);
